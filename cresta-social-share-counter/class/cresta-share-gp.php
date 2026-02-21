@@ -17,14 +17,15 @@ class crestaShareSocialCount {
 			$getPost = get_post_meta( $post->ID, 'cresta_facebook_share_count', true ) ? get_post_meta( $post->ID, 'cresta_facebook_share_count', true ) : 0;
 			if ( $count === false ) {
 				$response = wp_remote_get( add_query_arg( array( 
-					'id' => rawurlencode(get_permalink( $post->ID )),
+					'id' => get_permalink( $post->ID ),
 					'access_token' => esc_attr($theToken),
-					'fields' => 'og_object{engagement}'
-				), 'https://graph.facebook.com/' ) );
+					'fields' => 'engagement'
+				), 'https://graph.facebook.com/v19.0/' ) );
 				if ( is_array( $response ) && ! is_wp_error( $response ) ) {
 					$body = json_decode( $response['body'],true );
-					if (array_key_exists('og_object', $body)) {
-						$total = intval($body['og_object']['engagement']['count']);
+					if (array_key_exists('engagement', $body)) {
+						$total = ( $body['engagement']['reaction_count'] ?? 0 ) + ( $body['engagement']['comment_count'] ?? 0 ) + ( $body['engagement']['share_count'] ?? 0 ) + ( $body['engagement']['comment_plugin_count'] ?? 0 );
+						$total = intval($total);
 					} else {
 						$total = 0;
 					}
@@ -40,14 +41,15 @@ class crestaShareSocialCount {
 		} else {
 			if ( $count === false ) {
 				$response = wp_remote_get( add_query_arg( array( 
-					'id' => rawurlencode(get_permalink( $post->ID )),
+					'id' => get_permalink( $post->ID ),
 					'access_token' => esc_attr($theToken),
-					'fields' => 'og_object{engagement}'
-				), 'https://graph.facebook.com/' ) );
+					'fields' => 'engagement'
+				), 'https://graph.facebook.com/v19.0/' ) );
 				if ( is_array( $response ) && ! is_wp_error( $response ) ) {
 					$body = json_decode( $response['body'],true );
-					if (array_key_exists('og_object', $body)) {
-						$total = intval($body['og_object']['engagement']['count']);
+					if (array_key_exists('engagement', $body)) {
+						$total = ( $body['engagement']['reaction_count'] ?? 0 ) + ( $body['engagement']['comment_count'] ?? 0 ) + ( $body['engagement']['share_count'] ?? 0 ) + ( $body['engagement']['comment_plugin_count'] ?? 0 );
+						$total = intval($total);
 					} else {
 						$total = 0;
 					}

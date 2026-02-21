@@ -18,14 +18,14 @@ class crestaShareSocialCount {
 			$getPost = get_post_meta( $post->ID, 'cresta_facebook_share_count', true ) ? get_post_meta( $post->ID, 'cresta_facebook_share_count', true ) : 0;
 			if ( $count_total === false ) {
 				$response = wp_remote_get( add_query_arg( array( 
-					'id' => rawurlencode(get_permalink( $post->ID )),
+					'id' => rget_permalink( $post->ID ),
 					'access_token' => esc_attr($theToken),
-					'fields' => 'og_object{engagement}'
-				), 'https://graph.facebook.com/' ) );
+					'fields' => 'engagement'
+				), 'https://graph.facebook.com/v19.0/' ) );
 				if ( is_array( $response ) && ! is_wp_error( $response ) ) {
 					$body = json_decode( $response['body'],true );
-					if (array_key_exists('og_object', $body)) {
-						$count = intval($body['og_object']['engagement']['count']);
+					if (array_key_exists('engagement', $body)) {
+						$count = intval(( $body['engagement']['reaction_count'] ?? 0 ) + ( $body['engagement']['comment_count'] ?? 0 ) + ( $body['engagement']['share_count'] ?? 0 ) + ( $body['engagement']['comment_plugin_count'] ?? 0 ));
 					} else {
 						$count = 0;
 					}
@@ -34,14 +34,14 @@ class crestaShareSocialCount {
 				}
 				
 				$response_old = wp_remote_get( add_query_arg( array( 
-					'id' => rawurlencode($oldurl),
+					'id' => $oldurl,
 					'access_token' => esc_attr($theToken),
-					'fields' => 'og_object{engagement}'
-				), 'https://graph.facebook.com/' ) );
+					'fields' => 'engagement'
+				), 'https://graph.facebook.com/v19.0/' ) );
 				if ( is_array( $response_old ) && ! is_wp_error( $response_old ) ) {
 					$body_old = json_decode( $response_old['body'],true );
-					if (array_key_exists('og_object', $body_old)) {
-						$count_old = intval($body_old['og_object']['engagement']['count']);
+					if (array_key_exists('engagement', $body_old)) {
+						$count_old = intval(( $body_old['engagement']['reaction_count'] ?? 0 ) + ( $body_old['engagement']['comment_count'] ?? 0 ) + ( $body_old['engagement']['share_count'] ?? 0 ) + ( $body_old['engagement']['comment_plugin_count'] ?? 0 ));
 					} else {
 						$count_old = 0;
 					}
@@ -59,14 +59,14 @@ class crestaShareSocialCount {
 		} else {
 			if ( $count_total === false ) {
 				$response = wp_remote_get( add_query_arg( array( 
-					'id' => rawurlencode(get_permalink( $post->ID )),
+					'id' => get_permalink( $post->ID ),
 					'access_token' => esc_attr($theToken),
-					'fields' => 'og_object{engagement}'
-				), 'https://graph.facebook.com/' ) );
+					'fields' => 'engagement'
+				), 'https://graph.facebook.com/v19.0/' ) );
 				if ( is_array( $response ) && ! is_wp_error( $response ) ) {
 					$body = json_decode( $response['body'],true );
-					if (array_key_exists('og_object', $body)) {
-						$count = intval($body['og_object']['engagement']['count']);
+					if (array_key_exists('engagement', $body)) {
+						$count = intval(( $body['engagement']['reaction_count'] ?? 0 ) + ( $body['engagement']['comment_count'] ?? 0 ) + ( $body['engagement']['share_count'] ?? 0 ) + ( $body['engagement']['comment_plugin_count'] ?? 0 ));
 					} else {
 						$count = 0;
 					}
@@ -75,14 +75,14 @@ class crestaShareSocialCount {
 				}
 				
 				$response_old = wp_remote_get( add_query_arg( array( 
-					'id' => rawurlencode($oldurl),
+					'id' => $oldurl,
 					'access_token' => esc_attr($theToken),
-					'fields' => 'og_object{engagement}'
-				), 'https://graph.facebook.com/' ) );
+					'fields' => 'engagement'
+				), 'https://graph.facebook.com/v19.0/' ) );
 				if ( is_array( $response_old ) && ! is_wp_error( $response_old ) ) {
 					$body_old = json_decode( $response_old['body'],true );
-					if (array_key_exists('og_object', $body_old)) {
-						$count_old = intval($body_old['og_object']['engagement']['count']);
+					if (array_key_exists('engagement', $body_old)) {
+						$count_old = intval(( $body_old['engagement']['reaction_count'] ?? 0 ) + ( $body_old['engagement']['comment_count'] ?? 0 ) + ( $body_old['engagement']['share_count'] ?? 0 ) + ( $body_old['engagement']['comment_plugin_count'] ?? 0 ));
 					} else {
 						$count_old = 0;
 					}

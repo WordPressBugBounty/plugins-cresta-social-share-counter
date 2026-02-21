@@ -3,8 +3,8 @@ Contributors: CrestaProject
 Donate link: https://crestaproject.com/downloads/cresta-social-share-counter/
 Tags: share, social, social share, social buttons, share button, share buttons, facebook, twitter, linkedin, pinterest, google plus, floating buttons, social count, social counter, sharing, social sharing, socialize, social icon, print, post, posts, page, plugin, facebook share, twitter share, google plus share, linkedin share, pinterest share
 Requires at least: 4.2
-Tested up to: 6.4
-Stable tag: 2.9.9.6
+Tested up to: 6.9
+Stable tag: 2.9.9.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,10 @@ Because the plugin is designed to work exclusively on individual pages (single p
 4. Social buttons before/after posts/page content
 
 == Changelog ==
+
+= 2.9.9.7 =
+* Added compatibility with WordPress 6.9
+* Updated Facebook API 
 
 = 2.9.9.6 =
 * Added compatibility with WordPress 6.4

@@ -3,7 +3,7 @@
  * Plugin Name: Cresta Social Share Counter
  * Plugin URI: https://crestaproject.com/downloads/cresta-social-share-counter/
  * Description: <strong>*** <a href="https://crestaproject.com/downloads/cresta-social-share-counter/?utm_source=plugin_counter&utm_medium=description_meta" target="_blank">Get Cresta Social Share Counter PRO</a> ***</strong> Share your posts and pages quickly and easily with Cresta Social Share Counter and show share counts.
- * Version: 2.9.9.6
+ * Version: 2.9.9.7
  * Author: CrestaProject - Rizzo Andrea
  * Author URI: https://crestaproject.com
  * License: GPL2
@@ -12,7 +12,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-define( 'CRESTA_SOCIAL_PLUGIN_VERSION', '2.9.9.6' );
+define( 'CRESTA_SOCIAL_PLUGIN_VERSION', '2.9.9.7' );
 add_action('admin_menu', 'cresta_social_share_menu');
 add_action('wp_enqueue_scripts', 'cresta_social_share_wp_enqueue_scripts');
 add_filter('the_content', 'cresta_filter_in_content' );
